@@ -5,7 +5,6 @@ from collections import namedtuple, deque
 from model_vb import VQNetwork
 
 import torch
-import torchvision.transforms as T
 import torch.nn.functional as F
 import torch.optim as optim
 
