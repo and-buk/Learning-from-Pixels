@@ -67,10 +67,10 @@ class Agent():
         
         Params
         ======
-            state (array_like): current state
+            state (ndarray): current state
             eps (float): epsilon, for epsilon-greedy action selection
         """
-        # Convert a numpy array to a new float tensor of shape (1, state_size) and upload it to device
+        # Convert a numpy array to a new float tensor and upload it to device
         state = torch.from_numpy(state).float().to(device)
         self.qnetwork_local.eval()
         with torch.no_grad():
@@ -92,13 +92,14 @@ class Agent():
             gamma (float): discount factor
         """
         states, actions, rewards, next_states, dones = experiences
-        
+
         self.qnetwork_local.eval()
+        # Use the local network to get the index of highest-valued action (best action) of the next state
         with torch.no_grad():
             action_selection = self.qnetwork_local(next_states).max(1)[1].unsqueeze(1)
         self.qnetwork_local.train()
         
-        # Get predicted Q values (for next states) from target model
+        # Get predicted Q values (for next states) from target network
         Q_targets_next = self.qnetwork_target(next_states).detach().gather(1, action_selection)
                 
         # Compute Q targets for current states 
@@ -166,10 +167,10 @@ class ReplayBuffer:
         Returns
         ====== 
             batch of experiences (tuple): 
-                states (torch.float): 2-D tensor of shape (batch_size, state_size)
+                states (torch.float): 5-D tensor of shape (batch_size, state_size)
                 actions (torch.long): 2-D tensor of shape (batch_size, 1)
                 rewards (torch.float): 2-D tensor of shape (batch_size, 1)
-                next_states (torch.float): 2-D tensor of shape (batch_size, 1)
+                next_states (torch.float): 5-D tensor of shape (batch_size, next_state_size)
                 dones (torch.float): 2-D tensor of shape (batch_size, 1)
         """
         experiences = random.sample(self.memory, k=self.batch_size)
