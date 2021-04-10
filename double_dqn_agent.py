@@ -2,7 +2,7 @@ import numpy as np
 import random
 from collections import namedtuple, deque
 
-from model_vb import VQNetwork
+from model import VQNetwork
 
 import torch
 import torch.nn.functional as F
