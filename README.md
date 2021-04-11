@@ -42,12 +42,12 @@ __*Note*:__ The project environment is similar to, but __not identical to the Ba
 
 ### Instructions
 
-The repository contains five files:
+The repository contains four files and one directory:
 
 - `double_dqn_agent.py`: DDQN agent with Experience replay 
 - `model.py`: CNN model 
 - `Navigation_Pixels.ipynb`: The code to explore the environment and train an agent
-- `checkpoint.pth`: Saved trained model weights of the successful agent
+- `checkpoint`: Saved trained model weights of the successful agent as a multipart ZIP file
 - `Report.md`: Description of implementation
 
 Follow the instructions in `Navigation_Pixels.ipynb` to get started with training an agent.
